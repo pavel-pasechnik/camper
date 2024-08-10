@@ -4,15 +4,17 @@
 
 :root {
   --button: #e44848;
+  --button-hover: #d84343;
   --main: #101828;
   --main-border: #10182833;
   --inputs: #f7f7f7;
   --block-features: #f2f4f7;
   --rating: #ffc531;
   --text: #475467;
-  --button-text: #fff;
+  --main-color: #fff;
+  --button-border: #47546733;
 
-  font-family: Inter, sans-serif;
+  font-family: inter, sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -21,7 +23,7 @@
   color: var(--text);
   text-rendering: optimizelegibility;
 
-  background-color: var(--block-features);
+  background-color: var(--main-color);
 
   font-synthesis: none;
 }

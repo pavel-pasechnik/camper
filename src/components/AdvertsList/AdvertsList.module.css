@@ -1,10 +1,30 @@
+.advert {
+  display: flex;
+  flex-direction: column;
+  row-gap: 52px;
+  align-items: center;
+  justify-content: center;
+}
+
 ul {
   display: flex;
   flex-direction: column;
+  gap: 32px;
+  margin-top: 32px;
 }
 
 .item {
   display: flex;
   flex-direction: row;
-  margin: 32px;
+}
+
+.load-more {
+  padding: 16px 32px;
+  background-color: var(--main-color);
+  border: 1px solid var(--button-border);
+  border-radius: 200px;
+}
+
+.load-more:hover {
+  border: 1px solid var(--button);
 }
