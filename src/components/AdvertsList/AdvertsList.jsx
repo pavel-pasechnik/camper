@@ -7,10 +7,10 @@ import Advert from '../Advert/Advert.jsx';
 
 const AdvertsList = () => {
   const adverts = useSelector(selectFilteredAdverts);
-  const [visibleCount, setVisibleCount] = useState(5); // Количество видимых объявлений
+  const [visibleCount, setVisibleCount] = useState(5);
 
   const handleLoadMore = () => {
-    setVisibleCount(prevCount => prevCount + 5); // Увеличиваем количество отображаемых объявлений на 5
+    setVisibleCount(prevCount => prevCount + 5);
   };
 
   return (
@@ -22,7 +22,7 @@ const AdvertsList = () => {
           </li>
         ))}
       </ul>
-      {visibleCount < adverts.length && ( // Показываем кнопку, только если есть еще объявления для загрузки
+      {visibleCount < adverts.length && (
         <button className={css['load-more']} type='button' onClick={handleLoadMore}>
           Load more
         </button>

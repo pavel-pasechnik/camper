@@ -1,0 +1,134 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.location {
+  position: relative;
+}
+
+.location-label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--text);
+}
+
+.location-input {
+  width: 360px;
+  height: 56px;
+  margin-top: 8px;
+  padding: 18px 18px 18px 50px;
+
+  color: var(--main);
+
+  background: var(--inputs);
+  border: none;
+  border-radius: 10px;
+}
+
+.error-location {
+  position: absolute;
+  top: 96px;
+  left: 0;
+  color: var(--button);
+}
+
+.location-input::placeholder {
+  color: var(--main);
+}
+
+.map-pin {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  fill: var(--main);
+}
+
+.filters {
+  width: 100%;
+}
+
+.filters-paragraph {
+  margin: 14px 0 24px;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+  color: var(--main);
+}
+
+.filters::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: var(--main-border);
+}
+
+.filters-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.filters-list li {
+  position: relative;
+}
+
+.icon {
+  fill: var(--main);
+}
+
+.filters-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 112px;
+  height: 95px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 125%;
+  color: var(--main);
+
+  background-color: var(--main-color);
+  border: 1px solid var(--main-border);
+  border-radius: 10px;
+  mix-blend-mode: multiply;
+}
+
+.filters-button:hover,
+.filters-button:active,
+.filters-button:focus {
+  border: 1px solid var(--button);
+}
+
+.search {
+  margin-top: 32px;
+  padding: 16px 40px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--main-color);
+  letter-spacing: -0.01em;
+
+  background-color: var(--button);
+  border: none;
+  border-radius: 200px;
+}
+
+.search:hover {
+  background-color: var(--button-hover);
+}
+
+.filters-button.selected {
+  border: 1px solid var(--button);
+}
