@@ -37,12 +37,7 @@ const ModalBackdrop = ({ children, onClose }) => {
   }, [handleCloseModal]);
 
   return (
-    <div
-      className={dynamicStyle}
-      onClick={handleCloseModal}
-      role='dialog'
-      aria-modal='true'
-      aria-labelledby='dialogTitle'>
+    <div className={dynamicStyle} onClick={handleCloseModal} role='presentation'>
       {children}
     </div>
   );

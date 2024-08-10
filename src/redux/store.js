@@ -9,21 +9,25 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
-import { userReducer } from './user/slice.js';
+import advertsReducer from './adverts/slice.js';
+import filtersReducer from './filters/slice.js';
 
-const userPersistConfig = {
-  key: 'user',
-  storage,
-  whitelist: ['token'],
-};
+// const authPersistConfig = {
+//   key: 'authSlice',
+//   storage,
+//   whitelist: ['token'],
+// };
+
+// const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistReducer(userPersistConfig, userReducer),
+    // auth: persistedAuthReducer,
+    adverts: advertsReducer,
+    filters: filtersReducer,
   },
-
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
