@@ -90,7 +90,7 @@ const Filters = () => {
             <button
               className={`${css['filters-button']} ${selectedFilters.equipment.includes('AC') ? css.selected : ''}`}
               type='button'
-              onClick={() => toggleFilter('equipment', 'AC')}>
+              onClick={() => toggleFilter('equipment', 'airConditioner')}>
               <svg className={css.icon} width='32' height='32'>
                 <use xlinkHref={`${svg}#icon-AC`} />
               </svg>
