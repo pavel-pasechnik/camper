@@ -1,11 +1,47 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import css from './Advert.module.css';
 import svg from '../../assets/sprite.svg';
+import { addToFavorites, removeFromFavorites } from '../../redux/favorites/slice.js';
 import Features from '../Features/Features.jsx';
 
-const Advert = ({ gallery, name, price, rating, reviews, location, description, details }) => {
-  const id = useId();
+const Advert = ({
+  id,
+  gallery,
+  name,
+  price,
+  rating,
+  reviews,
+  location,
+  description,
+  details,
+  isFavorite,
+}) => {
+  const [favorite, setFavorite] = useState(isFavorite || false);
+  const dispatch = useDispatch();
+
+  const toggleFavorite = () => {
+    if (favorite) {
+      dispatch(removeFromFavorites(id));
+    } else {
+      dispatch(
+        addToFavorites({
+          id,
+          gallery,
+          name,
+          price,
+          rating,
+          reviews,
+          location,
+          description,
+          details,
+        })
+      );
+    }
+
+    setFavorite(!favorite);
+  };
 
   return (
     <div className={css.card}>
@@ -16,7 +52,11 @@ const Advert = ({ gallery, name, price, rating, reviews, location, description, 
           <div className={css.price}>
             <p className={css.currency}>€</p>
             <p className={css.sum}>{price}</p>
-            <svg className={css.heart} width='24' height='24'>
+            <svg
+              className={`${css.heart} ${favorite ? css.favorite : ''}`}
+              width='24'
+              height='24'
+              onClick={toggleFavorite}>
               <use xlinkHref={`${svg}#icon-heart`} />
             </svg>
           </div>

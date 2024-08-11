@@ -1,19 +1,13 @@
-import { Suspense, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 
-import css from './Favorites.jsx';
+import css from './Favorites.module.css';
 import FavoritesList from '../../components/FavoritesList/FavoritesList.jsx';
-import { fetchFavorites } from '../../redux/favorites/operations.js';
-import { selectError, selectLoading } from '../../redux/favorites/selectors.js';
+import { selectError, selectFavorites, selectLoading } from '../../redux/favorites/selectors.js';
 
 const Favorites = () => {
-  const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [dispatch]);
 
   return (
     <div>

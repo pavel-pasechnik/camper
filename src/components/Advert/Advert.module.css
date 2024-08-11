@@ -155,3 +155,7 @@ img {
 .show-more:hover {
   background-color: var(--button-hover);
 }
+
+.favorite {
+  fill: var(--button);
+}

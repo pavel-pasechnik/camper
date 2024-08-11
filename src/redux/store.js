@@ -12,6 +12,7 @@ import {
 // import storage from 'redux-persist/lib/storage';
 
 import advertsReducer from './adverts/slice.js';
+import favoritesReducer from './favorites/slice.js';
 import filtersReducer from './filters/slice.js';
 
 // const authPersistConfig = {
@@ -27,6 +28,7 @@ export const store = configureStore({
     // auth: persistedAuthReducer,
     adverts: advertsReducer,
     filters: filtersReducer,
+    favorites: favoritesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

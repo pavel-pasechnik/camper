@@ -7,10 +7,10 @@ import Advert from '../Advert/Advert.jsx';
 
 const AdvertsList = () => {
   const adverts = useSelector(selectFilteredAdverts);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   const handleLoadMore = () => {
-    setVisibleCount(prevCount => prevCount + 5);
+    setVisibleCount(prevCount => prevCount + 4);
   };
 
   return (
