@@ -4,7 +4,7 @@ import css from './Advert.module.css';
 import svg from '../../assets/sprite.svg';
 import Features from '../Features/Features.jsx';
 
-const Advert = ({ gallery, name, price, rating, location, description, details }) => {
+const Advert = ({ gallery, name, price, rating, reviews, location, description, details }) => {
   const id = useId();
 
   return (
@@ -16,13 +16,19 @@ const Advert = ({ gallery, name, price, rating, location, description, details }
           <div className={css.price}>
             <p className={css.currency}>€</p>
             <p className={css.sum}>{price}</p>
+            <svg className={css.heart} width='24' height='24'>
+              <use xlinkHref={`${svg}#icon-heart`} />
+            </svg>
           </div>
         </div>
         <div className={css['sub-title']}>
-          <svg className={css.star} width='16' height='16'>
-            <use xlinkHref={`${svg}#icon-star`} />
-          </svg>
-          <p className={css.rating}>{rating}</p>
+          <div className={css.reviews}>
+            <svg className={css.star} width='16' height='16'>
+              <use xlinkHref={`${svg}#icon-star`} />
+            </svg>
+            <p className={css.rating}>{rating}</p>
+            <p>{`(${reviews.length} Reviews)`}</p>
+          </div>
           <svg className={css['map-pin']} width='16' height='16'>
             <use xlinkHref={`${svg}#icon-map-pin`} />
           </svg>

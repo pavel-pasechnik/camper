@@ -9,23 +9,24 @@ export const selectError = state => state.adverts.error;
 export const selectFilteredAdverts = createSelector(
   [selectAdverts, selectFilters],
   (adverts, filter) => {
-    // Получаем массив ключей для фильтрации
-    const filterKeys = filter.selectedFilters.equipment;
+    const filterEquipmentKeys = filter.selectedFilters.equipment;
+    const filterType = filter.selectedFilters.type;
+    const filterTransmission = filter.selectedFilters.transmission;
 
-    // Фильтрация
     const filteredAdverts = adverts.filter(advert => {
       const details = advert.details;
+      const form = advert.form;
+      const transmission = advert.transmission;
 
-      // Фильтрация по локации
       const locationMatch = advert.location.includes(filter.location);
 
-      // Если нет ключей для фильтрации, возвращаем все объявления
-      if (!filterKeys || filterKeys.length === 0) return locationMatch;
+      const detailsMatch = filterEquipmentKeys.every(key => key in details && details[key] !== 0);
 
-      // Фильтрация по нескольким ключам
-      const detailsMatch = filterKeys.every(key => key in details && details[key] !== 0);
+      const formMatch = filterType.every(type => form.includes(type));
 
-      return locationMatch && detailsMatch;
+      const transmissionMatch = filterTransmission.every(value => transmission.includes(value));
+
+      return locationMatch && detailsMatch && formMatch && transmissionMatch;
     });
 
     return filteredAdverts;

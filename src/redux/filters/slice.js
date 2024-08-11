@@ -1,17 +1,29 @@
+// filters/slice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const slice = createSlice({
+const initialState = {
+  location: '',
+  selectedFilters: {
+    equipment: [],
+    transmission: [],
+    type: [],
+  },
+};
+
+const filtersSlice = createSlice({
   name: 'filters',
-  initialState: { location: '', selectedFilters: { equipment: [], type: [] } },
+  initialState,
   reducers: {
     changeFilter(state, action) {
-      const { location, selectedFilters } = action.payload;
-
-      state.location = location;
-      state.selectedFilters = selectedFilters;
+      state.location = action.payload.location;
+      state.selectedFilters = action.payload.selectedFilters;
+    },
+    setSelectedFilters(state, action) {
+      state.selectedFilters = action.payload;
     },
   },
 });
 
-export const { changeFilter } = slice.actions;
-export default slice.reducer;
+export const { changeFilter, setSelectedFilters } = filtersSlice.actions;
+
+export default filtersSlice.reducer;

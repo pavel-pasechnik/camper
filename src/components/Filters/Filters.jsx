@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useId, useState } from 'react';
+import React, { useId, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -28,8 +28,10 @@ const Filters = () => {
   const filtersId = useId();
   const dispatch = useDispatch();
 
+  // Инициализация состояния selectedFilters с пустыми массивами для каждой категории
   const [selectedFilters, setSelectedFilters] = useState({
     equipment: [],
+    transmission: [],
     type: [],
   });
 
@@ -37,27 +39,21 @@ const Filters = () => {
     const filtersArray = Array.isArray(filters) ? filters : [filters];
 
     setSelectedFilters(prevState => {
-      const currentFilters = prevState[category];
+      const currentFilters = prevState[category] || [];
       const allFiltersSelected = filtersArray.every(filter => currentFilters.includes(filter));
 
-      if (allFiltersSelected) {
-        return {
-          ...prevState,
-          [category]: currentFilters.filter(f => !filtersArray.includes(f)),
-        };
-      }
+      const newFilters = allFiltersSelected
+        ? currentFilters.filter(f => !filtersArray.includes(f))
+        : [...currentFilters, ...filtersArray.filter(filter => !currentFilters.includes(filter))];
 
       return {
         ...prevState,
-        [category]: [
-          ...currentFilters,
-          ...filtersArray.filter(filter => !currentFilters.includes(filter)),
-        ],
+        [category]: newFilters,
       };
     });
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = values => {
     const filtersToSubmit = {
       ...values,
       selectedFilters,
@@ -103,9 +99,9 @@ const Filters = () => {
           </li>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.equipment.includes('Automatic') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.transmission.includes('automatic') ? css.selected : ''}`}
               type='button'
-              onClick={() => toggleFilter('equipment', 'automatic')}>
+              onClick={() => toggleFilter('transmission', 'automatic')}>
               <svg className={css.icon} width='32' height='32'>
                 <use xlinkHref={`${svg}#icon-automatic`} />
               </svg>
@@ -114,7 +110,7 @@ const Filters = () => {
           </li>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.equipment.includes('Kitchen') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.equipment.includes('kitchen') ? css.selected : ''}`}
               type='button'
               onClick={() => toggleFilter('equipment', 'kitchen')}>
               <svg className={css.icon} width='32' height='32'>
@@ -136,7 +132,7 @@ const Filters = () => {
           </li>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.equipment.includes('Shower/WC') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.equipment.includes('shower') && selectedFilters.equipment.includes('toilet') ? css.selected : ''}`}
               type='button'
               onClick={() => toggleFilter('equipment', ['shower', 'toilet'])}>
               <svg className={css.icon} width='32' height='32'>
@@ -152,7 +148,7 @@ const Filters = () => {
         <ul className={css['filters-list']}>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.type.includes('Van') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.type.includes('van') ? css.selected : ''}`}
               type='button'
               onClick={() => toggleFilter('type', 'van')}>
               <svg className={css.icon} width='32' height='32'>
@@ -163,7 +159,7 @@ const Filters = () => {
           </li>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.type.includes('Fully Integrated') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.type.includes('fullyIntegrated') ? css.selected : ''}`}
               type='button'
               onClick={() => toggleFilter('type', 'fullyIntegrated')}>
               <svg className={css.icon} width='32' height='32'>
@@ -174,7 +170,7 @@ const Filters = () => {
           </li>
           <li>
             <button
-              className={`${css['filters-button']} ${selectedFilters.type.includes('Alcove') ? css.selected : ''}`}
+              className={`${css['filters-button']} ${selectedFilters.type.includes('alcove') ? css.selected : ''}`}
               type='button'
               onClick={() => toggleFilter('type', 'alcove')}>
               <svg className={css.icon} width='32' height='32'>
